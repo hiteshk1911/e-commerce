@@ -6,6 +6,8 @@ spring:
     name: api-gateway
   cloud:
     gateway:
+      default-filters:
+        - AddRequestHeader=Authorization, {Authorization}
       discovery:
         locator:
           enabled: true
@@ -14,7 +16,7 @@ spring:
         - id: user-service
           uri: lb://user-service
           predicates:
-            - Path=/users/**
+            - Path=/api/users/**
 
 eureka:
   client:
